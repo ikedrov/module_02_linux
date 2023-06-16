@@ -1,0 +1,5 @@
+total 0
+drwxr-xr-x  10 ivankedrov  staff  320 Jun 16 17:21 homework
+-rw-r--r--   1 ivankedrov  staff    0 Jun 16 18:05 ls.txt
+drwxr-xr-x   5 ivankedrov  staff  160 Jun 16 17:21 materials
+drwxr-xr-x   6 ivankedrov  staff  192 Jun 16 17:22 venv

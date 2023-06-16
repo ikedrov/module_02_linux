@@ -8,13 +8,19 @@
 """
 
 from flask import Flask
+from datetime import datetime
 
 app = Flask(__name__)
 
+weekdays = datetime.today().weekday()
+days = ('понедельника', 'вторника', 'среды', 'четверга', 'пятницы', 'субботы', 'воскресенья')
+@app.route('/hello-world/<name>')
+def hello_world(name):
 
-@app.route('/hello-world/...')
-def hello_world():
-    ...
+    if weekdays in (0, 1, 3, 6):
+        return f'Привет, {name}. Хорошего {days[weekdays]}!'
+    else:
+        return f'Привет, {name}. Хорошей {days[weekdays]}!'
 
 
 if __name__ == '__main__':

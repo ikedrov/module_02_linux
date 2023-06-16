@@ -38,7 +38,19 @@ import sys
 
 
 def decrypt(encryption: str) -> str:
-    ...
+
+    result = []
+
+    for i in encryption:
+        result.append(i)
+
+    if len(result) > 2 and (result[-1], result[-2]) == ('.', '.'):
+        result.pop()
+        result.pop()
+        if result:
+            result.pop()
+
+    return ''.join(char for char in result if char != '.')
 
 
 if __name__ == '__main__':

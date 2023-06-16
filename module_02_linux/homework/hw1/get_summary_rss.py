@@ -14,11 +14,26 @@ $ ps aux > output_file.txt
 """
 
 
-def get_summary_rss(ps_output_file_path: str) -> str:
-    ...
+import os.path
+
+path = os.path.abspath('output_file.txt')
+def get_summary_rss(file: str) -> str:
+
+    summ = 0
+    with open(file, 'r') as f:
+        f = f.readlines()[1:]
+        for i in range(len(f)):
+            lst = f[i].split()
+            summ += int(lst[5])
+
+    bits = summ
+    kbits = summ / 1024
+    mbits = kbits / 1024
+
+    print(f'Memory usage: {round(mbits, 2)} MiB, {round(kbits, 2)} KiB, {round(bits, 2)} B')
+
 
 
 if __name__ == '__main__':
-    path: str = 'PATH_TO_OUTPUT_FILE'
-    summary_rss: str = get_summary_rss(path)
-    print(summary_rss)
+
+    get_summary_rss(path)
