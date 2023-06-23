@@ -7,23 +7,21 @@ $ ls -l | python3 get_mean_size.py
 а возвращает средний размер файла в каталоге.
 """
 
+import sys
 
-
-lines = 'ls.txt'
+lines = sys.stdin.readlines()[1:]
 def get_mean_size(lines):
 
     average_size = 0
     count = 0
 
-    with open(lines, 'r') as l:
-        l = l.readlines()[1:]
-        if not l:
-            return 'No files'
-        else:
-            for line in l:
-                line = line.split()
-                average_size += int(line[4])
-                count += 1
+    if not lines:
+        return 'No files'
+    else:
+        for line in lines:
+            line = line.split()
+            average_size += int(line[4])
+            count += 1
 
     return round(average_size / count, 2)
 

@@ -21,8 +21,11 @@ app = Flask(__name__)
 @app.route('/max_number/path:numbers')
 def max_number(numbers):
 
-    numbers_max = (int(i) for i in numbers.split('/'))
-    return f'Максимальное число: <i>{max(numbers_max)}</i>'
+    try:
+        numbers_max = (int(i) for i in numbers.split('/'))
+        return f'Максимальное число: <i>{max(numbers_max)}</i>'
+    except:
+        return 'Введены не числа'
 
 
 if __name__ == "__main__":

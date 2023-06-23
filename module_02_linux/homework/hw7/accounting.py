@@ -26,7 +26,6 @@ def addDay(date: str, number: int) -> str:
     month = int(date[4:6])
     year = int(date[:4])
 
-    global storage
     storage.setdefault(year, {}).setdefault(month, {}).setdefault(day, 0)
     storage[year][month][day] += number
 
@@ -35,18 +34,11 @@ def addDay(date: str, number: int) -> str:
 @app.route('/calculate/<int:year>')
 def calculYear(year: int) -> str:
 
-    global storage
-    summ = 0
-
-    for value in storage[year].values():
-        summ += sum(value.values())
-
-    return f'Траты за год({year}): {str(summ)}'
+    return f'Траты за год({year}): {str(sum(storage[year].values()))}'
 
 @app.route('/calculate/<int:year>/<int:month>')
 def calculMonth(year: int, month: int) -> str:
 
-    global storage
     return f'Траты за месяц({year}-{month}): {str(sum(storage[year][month].values()))}'
 
 

@@ -26,12 +26,13 @@ def get_summary_rss(file: str) -> str:
             lst = f[i].split()
             summ += int(lst[5])
 
-    bits = summ
-    kbits = summ / 1024
-    mbits = kbits / 1024
 
-    print(f'Memory usage: {round(mbits, 2)} MiB, {round(kbits, 2)} KiB, {round(bits, 2)} B')
-
+    if summ <= 1024:
+        print(f'Memory usage: {round(summ, 2)} B')
+    elif 1024 < summ <= 1024 * 1024:
+        print(f'Memory usage: {round(summ / 1024, 2)} KiB')
+    else:
+        print(f'Memory usage: {round(summ / (1024 * 1024), 2)} MiB')
 
 
 if __name__ == '__main__':
