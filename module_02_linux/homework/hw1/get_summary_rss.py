@@ -17,24 +17,28 @@ $ ps aux > output_file.txt
 import os.path
 
 path = os.path.abspath('output_file.txt')
-def get_summary_rss(file: str) -> str:
+def get_summary_rss(ps_output_file_path: str) -> str:
 
     summ = 0
-    with open(file, 'r') as f:
+    kbytes = 2 ** 10
+    kbytes_labels = {0: '', 1: 'kilo', 2: 'mega', 3: 'giga', 4: 'tera'}
+    count = 0
+
+    with open(ps_output_file_path, 'r') as f:
         f = f.readlines()[1:]
         for i in range(len(f)):
             lst = f[i].split()
             summ += int(lst[5])
 
+    while summ > kbytes:
+        summ /= kbytes
+        count += 1
 
-    if summ <= 1024:
-        print(f'Memory usage: {round(summ, 2)} B')
-    elif 1024 < summ <= 1024 * 1024:
-        print(f'Memory usage: {round(summ / 1024, 2)} KiB')
-    else:
-        print(f'Memory usage: {round(summ / (1024 * 1024), 2)} MiB')
+    return f'{str(round(summ, 2))} {kbytes_labels[count]}bytes'
 
 
 if __name__ == '__main__':
+    path: str = os.path.abspath('output_file.txt')
+    summary_rss: str = get_summary_rss(path)
+    print(summary_rss)
 
-    get_summary_rss(path)

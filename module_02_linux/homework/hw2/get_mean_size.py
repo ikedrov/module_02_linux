@@ -9,16 +9,15 @@ $ ls -l | python3 get_mean_size.py
 
 import sys
 
-lines = sys.stdin.readlines()[1:]
-def get_mean_size(lines):
+def get_mean_size(data):
 
     average_size = 0
     count = 0
 
-    if not lines:
-        return 'No files'
+    if not data:
+        return 0
     else:
-        for line in lines:
+        for line in data:
             line = line.split()
             average_size += int(line[4])
             count += 1
@@ -27,6 +26,7 @@ def get_mean_size(lines):
 
 
 if __name__ == '__main__':
-    print(f'Average size of file is {get_mean_size(lines)} bytes.')
-
+    data: str = sys.stdin.readlines()[1:]
+    mean_size: float = get_mean_size(data)
+    print(mean_size)
 
